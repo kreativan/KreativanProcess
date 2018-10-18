@@ -8,6 +8,8 @@
  *
 */
 
+$this_module = $this->modules->get("KreativanProcess");
+
 // $this->session->set("status", "message");
 // $this->session->set("alert", "This is custom admin message");
 
