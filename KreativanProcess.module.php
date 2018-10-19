@@ -48,8 +48,8 @@ class KreativanProcess extends Process {
 
 		// include admin markup file
 		$template_file = $this->config->paths->siteModules . $this->className() . "/admin.php";
-		return $this->files->render($template_file);
-		
+		return $this->files->render($template_file, ["this_module" => $this]);
+
 	}
 
 	/**
