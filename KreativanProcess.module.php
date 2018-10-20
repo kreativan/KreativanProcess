@@ -46,6 +46,14 @@ class KreativanProcess extends Process {
 		$this->session->remove('alert');
 
 
+		// set a new headline, replacing the one used by our page
+		// this is optional as PW will auto-generate a headline
+		$this->headline('Kreativan UI!');
+
+		// add a breadcrumb that returns to our main page
+		// this is optional as PW will auto-generate breadcrumbs
+		$this->breadcrumb('./', 'Kreativan UI');
+
 		// include admin markup file
 		$template_file = $this->config->paths->siteModules . $this->className() . "/admin.php";
 		return $this->files->render($template_file, ["this_module" => $this]);
@@ -64,7 +72,8 @@ class KreativanProcess extends Process {
 
 		// add a breadcrumb that returns to our main page
 		// this is optional as PW will auto-generate breadcrumbs
-		$this->breadcrumb('../', 'Hello');
+		$this->breadcrumb('./', 'Kreativan UI');
+		$this->breadcrumb('./', 'Subpage');
 
 		$out = 	"
 			<h2>Not much to to see here</h2>
