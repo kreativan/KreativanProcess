@@ -17,35 +17,71 @@
 
 class KreativanProcessConfig extends ModuleConfig {
 
-	public function __construct() {
+	public function getInputfields() {
+		$inputfields = parent::getInputfields();
 
-		$this->add(array(
 
-			// Text field: greeting
-			array(
-				'name' => 'greeting', // name of field
-				'type' => 'text', // type of field (any Inputfield module name)
-				'label' => $this->_('Hello Greeting'), // field label
-				'description' => $this->_('What would you like to say to people using this module?'),
-				'required' => true,
-				'value' => $this->_('A very happy hello world to you.'), // default value
-			),
+		// create templates options array
+		$templatesArr = array();
+		foreach($this->templates as $tmp) {
+			$templatesArr["$tmp"] = $tmp->name;
+		}
 
-			// Radio buttons: greetingType
-			array(
-				'name' => 'greetingType',
-				'type' => 'radios',
-				'label' => $this->_('Greeting Type'),
-				'options' => array(
-					// options array of value => label
-					'message' => $this->_('Message'),
-					'warning' => $this->_('Warning'),
-					'error' => $this->_('Error'),
-					),
-				'value' => 'warning', // default value
-				'optionColumns' => 1, // make options display on one line
-				'notes' => $this->_('Choose wisely'), // like description but appears under field
-			)
-		));
+		// create pages options array
+		$pagesArr = array();
+		foreach($this->pages->get("/")->children("include=hidden") as $p) {
+			$pagesArr["$p"] = $p->title;
+		}
+
+
+		$wrapper = new InputfieldWrapper();
+
+
+		/**
+		 * 	Options
+		 *
+		 */
+		$options = $this->wire('modules')->get("InputfieldFieldset");
+		$options->label = __("Options");
+		//$options->collapsed = 1;
+		$options->icon = "fa-cog";
+		$wrapper->add($options);
+
+
+			// radio
+			$f = $this->wire('modules')->get("InputfieldRadios");
+			$f->attr('name', 'yes_no');
+			$f->label = 'Split XML on File Upload';
+			$f->options = array(
+				'1' => $this->_('Yes'),
+				'0' => $this->_('No'),
+			);
+			$f->required = true;
+			$f->defaultValue = '0';
+			$f->optionColumns = 1;
+			$f->columnWidth = "100%";
+			$f->collapsed = 0;
+			$options->add($f);
+
+
+			// text
+			$f = $this->wire('modules')->get("InputfieldText");
+			$f->attr('name', 'some_text');
+			$f->label = 'Some Text';
+			$f->columnWidth = "50%";
+			$this->_('Default = 10');
+			$options->add($f);
+
+
+		// render fieldset
+		$inputfields->add($options);
+
+
+
+		// render fields
+		return $inputfields;
+
+
 	}
+
 }

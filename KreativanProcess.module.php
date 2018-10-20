@@ -56,11 +56,11 @@ class KreativanProcess extends Process {
 	 * Called when the URL is this module's page URL + "/something/"
 	 *
 	 */
-	public function ___executeSomething() {
+	public function ___executeSubpage() {
 
 		// set a new headline, replacing the one used by our page
 		// this is optional as PW will auto-generate a headline
-		$this->headline('This is something!');
+		$this->headline('This is subpage!');
 
 		// add a breadcrumb that returns to our main page
 		// this is optional as PW will auto-generate breadcrumbs
