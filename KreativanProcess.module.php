@@ -72,7 +72,7 @@ class KreativanProcess extends Process {
 
 		// add a breadcrumb that returns to our main page
 		// this is optional as PW will auto-generate breadcrumbs
-		$this->breadcrumb('./', 'Kreativan UI');
+		$this->breadcrumb('../', 'Kreativan UI');
 		$this->breadcrumb('./', 'Subpage');
 
 		$out = 	"
