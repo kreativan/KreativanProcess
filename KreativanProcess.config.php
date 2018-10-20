@@ -68,7 +68,7 @@ class KreativanProcessConfig extends ModuleConfig {
 			$f = $this->wire('modules')->get("InputfieldText");
 			$f->attr('name', 'some_text');
 			$f->label = 'Some Text';
-			$f->columnWidth = "50%";
+			$f->columnWidth = "100%";
 			$this->_('Default = 10');
 			$options->add($f);
 
