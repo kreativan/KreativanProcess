@@ -61,7 +61,7 @@ class KreativanProcess extends Process {
 	}
 
 	/**
-	 * Called when the URL is this module's page URL + "/something/"
+	 * Called when the URL is this module's page URL + "/subpage/"
 	 *
 	 */
 	public function ___executeSubpage() {
