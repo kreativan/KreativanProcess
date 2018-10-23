@@ -22,6 +22,25 @@ class KreativanProcess extends Process {
 	}
 
 	/**
+     *  Include Admin File
+     *  Custom Admin UI
+     *  @var file_name
+     *
+     */
+    private function includeAdminFile($file_name) {
+
+        // define variables you want to pass to the included file
+        $vars = [
+            "this_module" => $this,
+            "module_edit_URL" => $this->urls->admin . "module/edit?name=" . $this->className() . "&collapse_info=1",
+        ];
+
+        $template_file = $this->config->paths->siteModules . $this->className() . "/" . $file_name;
+        return $this->files->render($template_file, $vars);
+
+    }
+
+	/**
 	 * This function is executed when a page with your Process assigned is accessed.
  	 *
 	 * This can be seen as your main or index function. You'll probably want to replace
@@ -54,9 +73,8 @@ class KreativanProcess extends Process {
 		// this is optional as PW will auto-generate breadcrumbs
 		$this->breadcrumb('./', 'Kreativan UI');
 
-		// include admin markup file
-		$template_file = $this->config->paths->siteModules . $this->className() . "/admin.php";
-		return $this->files->render($template_file, ["this_module" => $this]);
+		// include admin file
+		return $this->includeAdminFile("admin.php");
 
 	}
 
