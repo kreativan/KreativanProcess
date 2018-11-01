@@ -19,19 +19,37 @@ class KreativanProcess extends Process {
 	 */
 	public function init() {
 		parent::init(); // always remember to call the parent init
+		
+		// display messages if session alert and status vars are set
+		if($this->session->status == 'message') {
+			$this->message($this->session->alert);
+
+		} else if($this->session->status == 'warning') {
+			$this->warning($this->session->alert);
+
+		} elseif($this->session->status == 'error') {
+			$this->error($this->session->alert);
+		}
+
+		// reset / delete status and alert session vars
+		$this->session->remove('status');
+		$this->session->remove('alert');
+		
 	}
 
 	/**
      *  Include Admin File
      *  Custom Admin UI
      *  @var file_name
+	 *	@var page_name	used to indentify subpages: URL =  $page->url . $page_name
      *
      */
-    private function includeAdminFile($file_name) {
+    private function includeAdminFile($file_name, $page_name = "") {
 
         // define variables you want to pass to the included file
         $vars = [
             "this_module" => $this,
+			"page_name" => $page_name,
             "module_edit_URL" => $this->urls->admin . "module/edit?name=" . $this->className() . "&collapse_info=1",
         ];
 
@@ -48,22 +66,6 @@ class KreativanProcess extends Process {
 	 *
 	 */
 	public function ___execute() {
-
-		// display messages if session alert and status vars are set
-		if($this->session->status == 'message') {
-			$this->message($this->session->alert);
-
-		} else if($this->session->status == 'warning') {
-			$this->warning($this->session->alert);
-
-		} elseif($this->session->status == 'error') {
-			$this->error($this->session->alert);
-		}
-
-		// reset / delete status and alert session vars
-		$this->session->remove('status');
-		$this->session->remove('alert');
-
 
 		// set a new headline, replacing the one used by our page
 		// this is optional as PW will auto-generate a headline
@@ -92,13 +94,9 @@ class KreativanProcess extends Process {
 		// this is optional as PW will auto-generate breadcrumbs
 		$this->breadcrumb('../', 'Kreativan UI');
 		$this->breadcrumb('./', 'Subpage');
-
-		$out = 	"
-			<h2>Not much to to see here</h2>
-			<p><a href='../'>Go Back</a></p>
-			";
-
-		return $out;
+		
+		// include admin file
+		return $this->includeAdminFile("subpage.php", "subpage");
 	}
 
 	/**

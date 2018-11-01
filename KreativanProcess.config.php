@@ -57,7 +57,7 @@ class KreativanProcessConfig extends ModuleConfig {
 				'0' => $this->_('No'),
 			);
 			$f->required = true;
-			$f->defaultValue = '0';
+			$f->defaultValue = 1;
 			$f->optionColumns = 1;
 			$f->columnWidth = "100%";
 			$f->collapsed = 0;
