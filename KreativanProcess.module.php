@@ -42,6 +42,7 @@ class KreativanProcess extends Process {
      *  Custom Admin UI
      *  @var file_name
 	 *	@var page_name	used to indentify subpages: URL =  $page->url . $page_name
+	 *	@example return $this->files->render("MY_ADMIN_FILE.php", $vars);
      *
      */
     private function includeAdminFile($file_name, $page_name = "") {
