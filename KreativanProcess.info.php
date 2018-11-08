@@ -58,9 +58,12 @@ $info = array(
 			'label' => 'Subpage',
 			'icon' => 'beer',
 		),
-	)
+	),
 
 	// for more options that you may specify here, see the file: /wire/core/Process.php
 	// and the file: /wire/core/Module.php
+	
+	'singular' => true,
+    'autoload' => false,
 
 );
